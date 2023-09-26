@@ -1,23 +1,29 @@
 import pandas as pd
-from numpy import array
-import matplotlib.pyplot as plt
 import numpy as np
+import matplotlib.pyplot as plt
 
 df = pd.read_csv('diemPython.csv', index_col=0, header=0)
-in_data = array(df.iloc[:, :])
-print(in_data)
-print('Tong so sinh vien di thi :')
+in_data = np.array(df.iloc[:, :])
+
 tongsv = in_data[:, 1]
-print(np.sum(tongsv))
+print('Tổng số sinh viên đi thi:', np.sum(tongsv))
+
 diemA = in_data[:, 3]
 diemBc = in_data[:, 4]
-print('Tong sv:', tongsv)
-maxa = diemA.max()
-i, = np.where(diemA == maxa)
-print('lop co nhieu diem A la {0} co {1} sv dat diem A'.format(in_data[i, 0], maxa))
-plt.plot(range(len(diemA)), diemA, 'r-', label="Diem A")
-plt.plot(range(len(diemBc)), diemBc, 'g-', label="Diem B +")
-plt.xlabel('Lơp')
-plt.ylabel(' So sv dat diem ')
-plt.legend(loc='upper right')
+
+diemA_count = np.sum(diemA >= 8)  # Điểm A: >= 8
+diemBc_count = np.sum((diemBc >= 6) & (diemBc < 8))  # Điểm B: 6 <= B < 8
+diemC_count = np.sum(diemBc < 6)  # Điểm C: < 6
+
+print('Số sinh viên đạt điểm A:', diemA_count)
+print('Số sinh viên đạt điểm B:', diemBc_count)
+print('Số sinh viên đạt điểm C:', diemC_count)
+
+total_students = diemA_count + diemBc_count + diemC_count
+print('Tổng số sinh viên:', total_students)
+
+plt.bar(['Điểm A', 'Điểm B', 'Điểm C'], [diemA_count, diemBc_count, diemC_count])
+plt.xlabel('Phân loại điểm')
+plt.ylabel('Số sinh viên')
+plt.title('Thống kê điểm theo phân loại A, B, C')
 plt.show()
