@@ -75,5 +75,5 @@ check_button.grid(row=3, columnspan=3)
 clear_button = tk.Button(root, text="Xóa", command=clear_entries)
 clear_button.grid(row=4, columnspan=3)
 
-# Khởi chạy giao diện
+
 root.mainloop()
