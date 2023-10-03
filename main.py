@@ -42,7 +42,7 @@ def check_triangle():
                 messagebox.showinfo("Kết quả", "Ba đoạn tạo thành tam giác vuông")
                 if AB == BC == AC:
                     messagebox.showinfo("Kết quả", "Ba đoạn tạo thành tam giác vuông đều")
-                else:
+                elif AB == BC or BC == AC or AB == AC:
                     messagebox.showinfo("Kết quả", "Ba đoạn tạo thành tam giác vuông cân")
             elif (AB == BC == AC):
                 messagebox.showinfo("Kết quả", "Ba đoạn tạo thành tam giác đều")
